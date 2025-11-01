@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ToDoTask>
+@section Scripts {
+<script>
+    @if (TempData["success"] != null)
+    {
+        <text>
+            toastr.success("@TempData["success"]");
+        </text>
+    }
+</script>
+}
+
+<div class="container">
+    <p> here is your To List</p>
+
+    <a href="/task/AddTask" class="btn btn-outline-info"> Create </a>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">DeadLine</th>
+                <th scope="col">File</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Title</th>
+                    <td>@item.Description</td>
+                    <td>@item.DeadLine</td>
+                    <td> <img src = "~/assets/@item.File" style="width:70px"/></td>
+                    <td> 
+                        <a href="/task/edit/@item.Id" class="btn btn-primary">edit</a>
+                        <a href="/task/delete/@item.Id" class="btn btn-danger">delete</a>
+
+                    </td>
+                </tr>
+            }
+           
+        </tbody>
+    </table>
+
+
+</div>
